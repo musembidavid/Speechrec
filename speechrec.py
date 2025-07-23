@@ -8,20 +8,20 @@ import pyaudio
 import webbrowser
 
 
-=
+
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.pause_threshold = 1
-      
-        r.adjust_for_ambient_noise(source, duration=1)
+        speak("please be quiet calibrating mic")
+        r.adjust_for_ambient_noise(source, duration=5)
         audio = r.listen(source)
         said = ""
         try:
-            said = r.recognize_google(audio)
+            said = r.recognize_google(audio, language='en-US')
             print(said)
         except Exception as e:
-            
+          
             speak("Sorry, I did not get that.")
     return said
 
@@ -64,6 +64,10 @@ while True:
     elif 'exit' in text:
         speak("Goodbye, till next time")
         exit()
+
+
+
+
 
 
 
