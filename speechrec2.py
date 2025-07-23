@@ -1,7 +1,6 @@
-import speech_recognition as sr
+import speech_recognition as  sr
 from gtts import gTTS
 import os
-import datetime
 import playsound
 import pyjokes
 import wikipedia
@@ -9,13 +8,12 @@ import pyaudio
 import webbrowser
 
 
-#get mic audio
+=
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.pause_threshold = 1
-        # wait for a second to let the recognizer adjust the
-        # energy threshold based on the surrounding noise level
+      
         r.adjust_for_ambient_noise(source, duration=1)
         audio = r.listen(source)
         said = ""
@@ -23,11 +21,10 @@ def get_audio():
             said = r.recognize_google(audio)
             print(said)
         except Exception as e:
-            #print("Exception " + str(e))
+            
             speak("Sorry, I did not get that.")
     return said
 
-#speak converted audio to text
 def speak(text):
     tts = gTTS(text=text, lang='en')
     filename = "voice.mp3"
@@ -39,9 +36,6 @@ def speak(text):
     playsound.playsound(filename)
 
 
-#let try it
-#text = get_audio()
-#speak(text)
 while True:
     print("I am listening...")
     text = get_audio().lower()
@@ -54,7 +48,7 @@ while True:
         url = f"https://www.youtube.com"
         webbrowser.get().open(url)
     elif 'friend' in text:
-        speak("yes you are")
+        speak("yes you are my friend")
     elif  'end this program' in text:
         speak("ok bye")
         exit()
@@ -70,6 +64,7 @@ while True:
     elif 'exit' in text:
         speak("Goodbye, till next time")
         exit()
+
 
 
 
